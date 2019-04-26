@@ -1,0 +1,20 @@
+<div class="menubar-container">
+  <button (click)="homeClick()">
+    home
+  </button>
+  <button (click)="blogClick()">
+    blog
+  </button>
+  <button (click)="aboutClick()">
+    about
+  </button>
+  <button (click)="postClick()" *ngIf="isLoggedIn">
+      post
+  </button>
+  <input placeholder="username" [(ngModel)]="loginData.username" />
+  <input placeholder="password" [(ngModel)]="loginData.password" />
+  <button (click)="login()">
+    login
+  </button>
+</div>
+<router-outlet></router-outlet>

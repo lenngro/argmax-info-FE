@@ -3,8 +3,8 @@ version: 0.1
 env:
     variables:
         S3_BUCKET: "argmax-info-fe"
-APP_NAME: "argmax-info-fe"
-BUILD_ENV : "prod"
+        APP_NAME: "argmax-info-fe"
+        BUILD_ENV : "prod"
 
 phases:
     install:
@@ -25,6 +25,6 @@ phases:
             - echo Build completed on `date`
 artifacts:
     files:
-        - '/'
+        - '**/*'
     base-directory: 'dist*'
     discard-paths: yes

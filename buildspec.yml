@@ -9,20 +9,20 @@ environment_variables:
 phases:
     install:
         commands:
-        - npm install -g @angular/cli
-        - npm install
+            - npm install -g @angular/cli
+            - npm install
 
     build:
         commands:
-        - echo Build started on `date`
-        - ng build --${BUILD_ENV}
+            - echo Build started on `date`
+            - ng build --${BUILD_ENV}
 
     post_build:
         commands:
-        #- aws s3 rm s3://${S3_BUCKET}/${APP_NAME} --recursive
-        #- echo S3 bucket is cleared.
-        - aws s3 cp --debug dist s3://${S3_BUCKET} --recursive
-        - echo Build completed on `date`
+            #- aws s3 rm s3://${S3_BUCKET}/${APP_NAME} --recursive
+            #- echo S3 bucket is cleared.
+            - aws s3 cp dist* s3://${S3_BUCKET} --recursive
+            - echo Build completed on `date`
         
 artifacts:
     files:

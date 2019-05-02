@@ -15,7 +15,7 @@ phases:
 
     build:
         commands:
-            - sudo npm run build --prod
+            - ng build --prod
 
 artifacts:
     files:

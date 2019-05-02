@@ -22,8 +22,8 @@ phases:
         commands:
             #- aws s3 rm s3://${S3_BUCKET}/${APP_NAME} --recursive
             #- echo S3 bucket is cleared.
-            - aws s3 cp ${BUILD_FOLDER} s3://${S3_BUCKET} --recursive --acl public-read
-        
+            - aws s3 cp ${BUILD_FOLDER} s3://${S3_BUCKET} --recursive
+
 artifacts:
     files:
         - '**/*'

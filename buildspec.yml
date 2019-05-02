@@ -5,6 +5,7 @@ environment_variables:
         S3_BUCKET: "argmax-info-fe"
         APP_NAME: "argmax-info-fe"
         BUILD_ENV : "prod"
+        BUILD_FOLDER: "dist"
 
 phases:
     install:
@@ -21,8 +22,7 @@ phases:
         commands:
             #- aws s3 rm s3://${S3_BUCKET}/${APP_NAME} --recursive
             #- echo S3 bucket is cleared.
-            - aws s3 sync dist* s3://${S3_BUCKET} --recursive
-            - echo Build completed on `date`
+            - aws s3 cp ${BUILD_FOLDER} s3://${S3_BUCKET} --recursive --acl public-read
         
 artifacts:
     files:

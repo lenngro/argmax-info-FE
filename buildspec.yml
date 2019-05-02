@@ -1,7 +1,7 @@
 version: 0.1
 
-environment_variables:
-    plaintext:
+env:
+    variables:
         S3_BUCKET: "argmax-info-fe"
         APP_NAME: "argmax-info-fe"
         BUILD_ENV : "prod"

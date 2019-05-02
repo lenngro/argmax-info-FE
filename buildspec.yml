@@ -1,7 +1,7 @@
 version: 0.1
 
-env:
-    variables:
+environment_variables:
+    plaintext:
         S3_BUCKET: "argmax-info-fe"
         APP_NAME: "argmax-info-fe"
         BUILD_ENV : "prod"
@@ -13,18 +13,21 @@ phases:
         - npm install
 
     build:
-            commands:
-            - echo Build started on `date`
-            - ng build --${BUILD_ENV}
+        commands:
+        - echo Build started on `date`
+        - ng build --${BUILD_ENV}
 
     post_build:
-            commands:
-            #- aws s3 rm s3://${S3_BUCKET}/${APP_NAME} --recursive
-            #- echo S3 bucket is cleared.
-            - aws s3 cp dist s3://${S3_BUCKET} --recursive
-            - echo Build completed on `date`
+        commands:
+        #- aws s3 rm s3://${S3_BUCKET}/${APP_NAME} --recursive
+        #- echo S3 bucket is cleared.
+        - aws s3 cp dist s3://${S3_BUCKET} --recursive
+        - echo Build completed on `date`
+        
 artifacts:
     files:
         - '**/*'
     base-directory: 'dist*'
     discard-paths: yes
+
+

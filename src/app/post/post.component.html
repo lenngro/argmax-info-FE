@@ -1,7 +1,19 @@
 <!-- use with ngModel -->
-<span >
+<div>
+    <p>Article Title</p>
+    <input placeholder="Article Title" [(ngModel)]="title">
+</div>
+<div class="mt-5">
+    <p>Article Description</p>
+    <input placeholder="Article Description" [(ngModel)]="description">
+</div>
+<div class="mt-5">
+    <p>Article Content</p>
     <quill-editor 
-    (onContentChanged)="updateArticle($event)">
+    [modules]="editor_modules"
+    [(ngModel)]="content">
     </quill-editor>
-</span>
-<button (click)="submitArticle()">submit</button>
+</div>
+<div class="mt-5">
+    <button (click)="submitArticle()">submit</button>
+</div>

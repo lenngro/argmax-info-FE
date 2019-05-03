@@ -6,11 +6,13 @@ import { ɵangular_packages_platform_browser_dynamic_platform_browser_dynamic_a 
 import { BlogService } from './services/blog.service';
 import { resolve } from 'q';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+
 export class AppComponent {
   currentPage: string;
   title = 'blog';
@@ -19,6 +21,7 @@ export class AppComponent {
   password: string;
   isLoggedIn: boolean;
   blogService: BlogService;
+  status: string;
   
 
   constructor(private router: Router, blogService: BlogService) {
@@ -34,7 +37,10 @@ export class AppComponent {
       password : ""
     }
     this.isLoggedIn = false;
+   }
 
+   onPage(page: string) {
+     return (page==this.status);
    }
 
    login() {
@@ -50,18 +56,22 @@ export class AppComponent {
 
    homeClick() {
     this.router.navigateByUrl('/home');
+    this.status = "home";
    }
 
    blogClick() {
     this.router.navigateByUrl('/blog');
+    this.status = "blog";
    }
 
    aboutClick() {
     this.router.navigateByUrl('/about');
+    this.status = "about";
    }
 
    postClick() {
      this.router.navigateByUrl('/post');
+     this.status = "post";
    }
   
   }

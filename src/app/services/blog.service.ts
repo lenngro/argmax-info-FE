@@ -19,13 +19,11 @@ constructor(private http: HttpClient) {
 }
 
 getPosts(): Observable<any> {
-  console.log(this.postUrl);
   return this.http.get<any>(this.postUrl);
 }
 
 login(loginData: LoginData){
   let url = this.userUrl + loginData.username;
-  console.log(url)
   return this.http.post<any>(url, {...loginData});
 }
 

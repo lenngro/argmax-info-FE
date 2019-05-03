@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { PostComponent } from './post.component';
 import { Routes, RouterModule } from '@angular/router';
 import { QuillModule } from 'ngx-quill'
+import { FormsModule } from '@angular/forms';
 
 const postRoutes: Routes = [
   { path: 'post', component: PostComponent }
@@ -12,7 +13,8 @@ const postRoutes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forRoot(postRoutes),
-    QuillModule
+    QuillModule,
+    FormsModule
   ],
   declarations: [PostComponent]
 })

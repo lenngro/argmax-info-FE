@@ -14,9 +14,9 @@ import { Post } from '../models/post.model';
 })
 export class PostComponent implements OnInit {
   
-  private content: any;
-  private title: any;
-  private description: any;
+  content: any;
+  title: any;
+  description: any;
   private blogService: BlogService;
   editor_modules: any;
 

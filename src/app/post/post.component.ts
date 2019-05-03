@@ -45,9 +45,9 @@ export class PostComponent implements OnInit {
 
   createPost() {
     let post: Post = {
-      title: this.title,
-      description: this.description,
-      content: this.content
+      title: String(this.title),
+      description: String(this.description),
+      content: String(this.content)
     }
     return post;
   }

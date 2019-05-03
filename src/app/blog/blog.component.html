@@ -1,5 +1,6 @@
-<div class="postContainer">
-  <div *ngFor="let post of posts" class="ql-content">
-      <div [innerHTML]="post.content" class="article"></div>
+<div class="container w-100 text-center">
+  <div *ngFor="let post of posts">
+      <h2 class="article.title">{{post.title}}</h2>
+      <h4 class="article.title">{{post.description}}</h4>
   </div>
 </div>

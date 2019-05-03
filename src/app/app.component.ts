@@ -22,7 +22,7 @@ export class AppComponent {
   isLoggedIn: boolean;
   blogService: BlogService;
   status: string;
-  
+
 
   constructor(private router: Router, blogService: BlogService) {
 
@@ -33,17 +33,23 @@ export class AppComponent {
     });
 
     this.loginData = {
-      username : "",
-      password : ""
+      username: "",
+      password: ""
     }
     this.isLoggedIn = false;
-   }
+  }
 
-   onPage(page: string) {
-     return (page==this.status);
-   }
+  onPage(page: string) {
+    return (page == this.status);
+  }
 
-   login() {
+  keyDownFunction(event) {
+    if(event.keyCode == 13) {
+      this.login();
+    }
+  }
+
+  login() {
 
     this.blogService.login(this.loginData).subscribe(response => {
       if (response === true) {
@@ -52,26 +58,28 @@ export class AppComponent {
     })
     this.loginData.username = "";
     this.loginData.password = "";
-   }
+  }
 
-   homeClick() {
+  homeClick() {
     this.router.navigateByUrl('/home');
     this.status = "home";
-   }
+  }
 
-   blogClick() {
+  blogClick() {
     this.router.navigateByUrl('/blog');
     this.status = "blog";
-   }
+  }
 
-   aboutClick() {
+  aboutClick() {
     this.router.navigateByUrl('/about');
     this.status = "about";
-   }
-
-   postClick() {
-     this.router.navigateByUrl('/post');
-     this.status = "post";
-   }
-  
   }
+
+  postClick() {
+    this.router.navigateByUrl('/post');
+    this.status = "post";
+  }
+
+
+
+}

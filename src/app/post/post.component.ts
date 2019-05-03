@@ -45,16 +45,16 @@ export class PostComponent implements OnInit {
 
   createPost() {
     let post: Post = {
-      title: String(this.title),
-      description: String(this.description),
-      content: String(this.content)
+      title: this.title,
+      description: this.description,
+      content: this.content
     }
     return post;
   }
 
   submitArticle() {
-
-    this.blogService.submitPost(this.createPost()).subscribe(response => {
+    let post = this.createPost();
+    this.blogService.submitPost(post).subscribe(response => {
       console.log(response)
     });
   }

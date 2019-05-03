@@ -1,3 +1,7 @@
 a {
     color: black;
 }
+.contact-item {
+    padding-left: 5px;
+    padding-right: 5px;
+}

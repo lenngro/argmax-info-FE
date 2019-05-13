@@ -33,7 +33,7 @@ export class AppComponent {
     });
 
     this.loginData = {
-      username: "",
+      username: "lenngro",
       password: ""
     }
     this.isLoggedIn = false;

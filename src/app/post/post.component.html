@@ -1,19 +1,23 @@
 <!-- use with ngModel -->
-<div>
-    <p>Article Title</p>
-    <input placeholder="Article Title" [(ngModel)]="title">
-</div>
-<div class="mt-5">
-    <p>Article Description</p>
-    <input placeholder="Article Description" [(ngModel)]="description">
-</div>
-<div class="mt-5">
-    <p>Article Content</p>
-    <quill-editor 
-    [modules]="editor_modules"
-    [(ngModel)]="content">
-    </quill-editor>
-</div>
-<div class="mt-5">
-    <button (click)="submitArticle()">submit</button>
+<div class="container">
+    <div>
+        <p>Article Title</p>
+        <input placeholder="Article Title" [(ngModel)]="postTemplate.title">
+    </div>
+    <div class="mt-5">
+        <p>Article Description</p>
+        <input placeholder="Article Description" [(ngModel)]="postTemplate.description">
+    </div>
+    <div class="mt-5">
+        <p>URL</p>
+        <input placeholder="URL" [(ngModel)]="postTemplate.url">
+    </div>
+    <div class="mt-5">
+        <p>Article Content</p>
+        <quill-editor [modules]="editor_modules" [(ngModel)]="postTemplate.content">
+        </quill-editor>
+    </div>
+    <div class="mt-5">
+        <button (click)="submitArticle()">submit</button>
+    </div>
 </div>

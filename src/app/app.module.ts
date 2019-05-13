@@ -18,8 +18,8 @@ const appRoutes: Routes = [
   {path: 'about', redirectTo: '/about', pathMatch: 'full'},
   {path: 'blog', redirectTo: '/blog', pathMatch: 'full'},
   {path: 'post', redirectTo: '/post', pathMatch: 'full'},
-  {path: '', redirectTo: '/home', pathMatch: 'full'},
-  {path: '**', redirectTo: '/home', pathMatch: 'full'},
+  {path: '', redirectTo: '/home', pathMatch: 'full'}
+  //{path: '**', redirectTo: '/home', pathMatch: 'full'},
 ];
 
 @NgModule({

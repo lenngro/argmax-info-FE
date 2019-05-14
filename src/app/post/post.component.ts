@@ -11,8 +11,8 @@ import { container } from '../utils/editorConfig';
 export class PostComponent implements OnInit {
   
   private blogService: BlogService;
-  private editor_modules: any;
-  private postTemplate: Post;
+  editor_modules: any;
+  postTemplate: Post;
 
   constructor(blogService: BlogService) {
 

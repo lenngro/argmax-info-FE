@@ -56,7 +56,6 @@ export class AppComponent {
         this.isLoggedIn = true;
       }
     })
-    this.loginData.username = "";
     this.loginData.password = "";
   }
 

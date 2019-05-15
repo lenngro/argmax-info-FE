@@ -1,7 +1,11 @@
 <div class="container w-100 text-center">
-  <div *ngFor="let post of posts">
-      <h2 class="article.title">{{post.title}}</h2>
-      <h4 class="article.title">{{post.description}}</h4>
+  <div *ngFor="let postMetadata of postsMetadata">
+    <a (click)="navigateToPost(postMetadata)" target="_blank">
+      <h2 class="article.title">{{postMetadata.title}}</h2>
+    </a>
+    <a (click)="navigateToPost(postMetadata)" target="_blank">
+      <h4 class="article.title">{{postMetadata.description}}</h4>
+    </a>
   </div>
 </div>
 <button (click)="openArticlePage()"></button>

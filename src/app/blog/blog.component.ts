@@ -2,6 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import { BlogService } from '../services/blog.service';
 import { Router } from '@angular/router';
 import { ArticleComponent } from './article/article.component';
+import { PostComponent } from '../post/post.component';
+import { PostResolver } from './article/post.resolver';
+import { Store, select } from '@ngrx/store';
+import { PostsMetadata } from '../store/blog/blog.selector';
+import { BlogState } from '../store/blog/blog.reducer';
 
 
 @Component({
@@ -11,26 +16,26 @@ import { ArticleComponent } from './article/article.component';
 })
 export class BlogComponent implements OnInit {
 
-  posts: Array<any>;
+  postsMetadata: Array<any>;
   url: string;
-  blogService: BlogService;
-  router: Router;
   article: any;
 
-  constructor(blogService: BlogService, router: Router) { 
-    this.blogService = blogService;
-    this.router = router;
+  constructor(private blogService: BlogService, private router: Router, private store: Store<BlogState>) {
+
+    this.store.pipe(select(PostsMetadata)).subscribe(postsMetadata => {
+      this.postsMetadata = postsMetadata;
+    });
   }
 
   ngOnInit() {
-    this.blogService.getPosts().subscribe((response)=> {
-      console.log(response)
-      this.posts = response;
-      });
+
+
   }
   
-  openArticlePage() {
-    this.router.navigate(['/article', this.posts]);
+  navigateToPost(postMetadata) {
+
+    this.router.navigateByUrl('blog/' + postMetadata.url);
+
   }
 
 

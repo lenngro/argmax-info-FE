@@ -1,5 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { BlogService } from 'src/app/services/blog.service';
+import { Post } from 'src/app/models/post.model';
 
 @Component({
   selector: 'app-article',
@@ -8,17 +10,23 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ArticleComponent implements OnInit {
 
-  article: any;
-  id: number;
-  private sub: any;
+  private post: Post;
+  @ViewChild('postBody') postBody;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute) {
+
+    let postContent = this.route.snapshot.data.data;
+    this.post = {
+      title: postContent.title,
+      description: postContent.description,
+      content: postContent.content,
+      url: postContent.url
+    }
+  }
 
   ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
-       this.article = params;
-       console.log(this.article)
-    });
+    this.postBody.nativeElement.innerHTML = this.post.content;
+
   }
 
 }

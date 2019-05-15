@@ -11,6 +11,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PostModule } from './post/post.module';
 import { QuillModule } from 'ngx-quill'
+import { StoreModule } from '@ngrx/store';
+import { blogReducer } from './store/blog/blog.reducer';
+import { BlogEffects } from './store/blog/blog.effects';
+import { EffectsModule } from '@ngrx/effects';
 
 
 const appRoutes: Routes = [
@@ -36,7 +40,10 @@ const appRoutes: Routes = [
     FormsModule,
     HttpClientModule,
     PostModule,
-    QuillModule
+    QuillModule,
+    BlogModule,
+    StoreModule.forRoot({blog: blogReducer}),
+    EffectsModule.forRoot([BlogEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

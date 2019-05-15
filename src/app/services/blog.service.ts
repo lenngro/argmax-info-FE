@@ -12,14 +12,25 @@ export class BlogService {
 
   postUrl: string;
   userUrl: string;
+  utilsUrl: string;
 
 constructor(private http: HttpClient) { 
   this.postUrl = environment.backend + environment.postsUrl;
   this.userUrl = environment.backend + environment.usersUrl;
+  this.utilsUrl = environment.backend + environment.utilsUrl;
+}
+
+getPost(singlePostUrl: string): Observable<any> {
+  let url = this.postUrl + singlePostUrl;
+  return this.http.get<any>(url);
 }
 
 getPosts(): Observable<any> {
   return this.http.get<any>(this.postUrl);
+}
+
+getPostsMetadata(): Observable<any> {
+  return this.http.get<any>(this.utilsUrl + 'list/');
 }
 
 login(loginData: LoginData){

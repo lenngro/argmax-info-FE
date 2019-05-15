@@ -5,6 +5,12 @@ import { LoginData } from './models/loginData.model';
 import { ɵangular_packages_platform_browser_dynamic_platform_browser_dynamic_a } from '@angular/platform-browser-dynamic';
 import { BlogService } from './services/blog.service';
 import { resolve } from 'q';
+import { ArticleComponent } from './blog/article/article.component';
+import { BlogState } from './store/blog/blog.reducer';
+import { Store, select } from '@ngrx/store';
+import { RequestPostsMetadata } from './store/blog/blog.actions';
+import { PostsMetadata } from './store/blog/blog.selector';
+import { PostResolver } from './blog/article/post.resolver';
 
 
 @Component({
@@ -20,23 +26,36 @@ export class AppComponent {
   username: string;
   password: string;
   isLoggedIn: boolean;
-  blogService: BlogService;
   status: string;
+  private postsMetadata: Array<any>;
 
 
-  constructor(private router: Router, blogService: BlogService) {
+  constructor(private router: Router, private blogService: BlogService, private store: Store<BlogState>) {
 
-    this.blogService = blogService;
-
-    this.router.events.subscribe(() => {
-      this.currentPage = router.url;
-    });
+    this.store.dispatch(new RequestPostsMetadata);
+    this.store.pipe(select(PostsMetadata)).subscribe(postsMetadata => {
+      this.postsMetadata = postsMetadata;
+      this.addAllPostsToConfig();
+    })
 
     this.loginData = {
       username: "lenngro",
       password: ""
     }
     this.isLoggedIn = false;
+
+    this.router.events.subscribe(() => {
+      this.currentPage = router.url;
+    });
+
+  }
+
+  addAllPostsToConfig() {
+
+    for (let postsMetadata of this.postsMetadata) {
+      let postUrl = 'blog/' + postsMetadata.url;
+      this.router.config.push({path: postUrl, component: ArticleComponent, resolve: { data: PostResolver }, data: { postMetadata: postsMetadata }})
+    }
   }
 
   onPage(page: string) {

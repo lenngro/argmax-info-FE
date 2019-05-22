@@ -11,3 +11,18 @@ export const PostsMetadata = createSelector(
     blog,
     blog => blog.postsMetadata 
 );
+
+export const SelectLogIn = createSelector(
+    blog,
+    blog => blog.loggedIn
+);
+
+export const SelectPageIndex = createSelector(
+    blog,
+    blog => blog.pageIndex
+);
+
+export const SelectVisiblePostsMetadata = createSelector(
+    blog,
+    blog => blog.visiblePostsMetadata
+)

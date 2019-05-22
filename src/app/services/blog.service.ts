@@ -38,7 +38,10 @@ login(loginData: LoginData){
   return this.http.post<any>(url, {...loginData});
 }
 
-submitPost(article: any) {
+submitPost(article: any, blogChange: boolean) {
+  if (blogChange) {
+    return this.http.post<any>(this.postUrl, )
+  }
   return this.http.post<any>(this.postUrl, {content: article})
 }
 

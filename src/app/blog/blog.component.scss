@@ -4,3 +4,23 @@
 .article-description {
     display: inline;
 }
+.container {
+    justify-content: center;
+    height: 80%;
+    position: relative;
+}
+.post {
+    margin-top: 5%;
+    text-align: center;
+}
+.buttonContainer {
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 10%;    
+}
+
+.paginationContainer {
+    width: 100%;
+    justify-content: center;
+}

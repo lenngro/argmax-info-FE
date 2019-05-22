@@ -5,15 +5,26 @@ import { Routes, RouterModule } from '@angular/router';
 import { ArticleComponent } from './article/article.component';
 import { PostResolver } from './article/post.resolver';
 
+
+import {MatPaginatorModule} from '@angular/material/paginator'; 
+
+/**
+ * 
 const blogRoutes: Routes = [
-  { path: 'blog', component: BlogComponent },
-  { path: 'article', component: ArticleComponent}
+  {
+    path: '',
+    component: BlogComponent
+  }
 ];
+
+ */
+//resolve: { data: PostResolver }, data: { postMetadata: postsMetadata }})
 
 @NgModule({
   imports: [
-    CommonModule,
-    RouterModule.forRoot(blogRoutes)
+    MatPaginatorModule,
+    CommonModule//,
+    //RouterModule.forRoot(blogRoutes)
   ],
   declarations: [BlogComponent, ArticleComponent],
   exports: [ArticleComponent],

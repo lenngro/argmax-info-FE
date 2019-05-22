@@ -6,7 +6,7 @@ import { QuillModule } from 'ngx-quill'
 import { FormsModule } from '@angular/forms';
 
 const postRoutes: Routes = [
-  { path: 'post', component: PostComponent }
+  { path: 'publish', component: PostComponent }
 ];
 
 @NgModule({

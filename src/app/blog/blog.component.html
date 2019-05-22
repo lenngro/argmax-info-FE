@@ -1,11 +1,29 @@
-<div class="container w-100 text-center">
-  <div *ngFor="let postMetadata of postsMetadata">
-    <a (click)="navigateToPost(postMetadata)" target="_blank">
-      <h2 class="article.title">{{postMetadata.title}}</h2>
-    </a>
-    <a (click)="navigateToPost(postMetadata)" target="_blank">
-      <h4 class="article.title">{{postMetadata.description}}</h4>
-    </a>
+<div class="container w-100">
+  <!-- Posts -->
+  <div class="postsContainer">
+    <div *ngFor="let postMetadata of visiblePostsMetadata" class="post">
+      <div class="postTitle">
+        <a (click)="navigateToPost(postMetadata)" target="_blank">
+          <h2 class="article.title">{{postMetadata.title}}</h2>
+        </a>
+      </div>
+      <div class="postDescription">
+        <a (click)="navigateToPost(postMetadata)" target="_blank">
+          <h5 class="article.title">{{postMetadata.description}}</h5>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="buttonContainer">
+    <button (click)="goBack()" [disabled]="!canGoBack" class="btn btn-light">
+      <i class="fas fa-long-arrow-alt-left fa-3x"></i>
+    </button>
+    <button (click)="goForth()" [disabled]="!canGoForth" class="btn btn-light">
+      <i class="fas fa-long-arrow-alt-right fa-3x"></i>
+    </button>
+    <!--button (click)="goForth()" [disabled]="!canGoForth">
+      GO FORTH
+    </button>-->
   </div>
 </div>
-<button (click)="openArticlePage()"></button>

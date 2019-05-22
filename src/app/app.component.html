@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark w-100">
+<nav class="navbar navbar-expand-lg navbar-light bg-light w-100">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
     aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -19,11 +19,14 @@
       </li>
     </ul>
   </div>
-  <div>
+  <div *ngIf="!isLoggedIn">
     <form (keydown)="keyDownFunction($event)">
       <input #password placeholder="password" class="form-control form-control-sm" type="password"
         [(ngModel)]="loginData.password" name="password" />
     </form>
+  </div>
+  <div *ngIf="isLoggedIn">
+    <button (click)="logout()">Log Out</button>
   </div>
 </nav>
 <router-outlet></router-outlet>

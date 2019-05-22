@@ -15,15 +15,24 @@ import { StoreModule } from '@ngrx/store';
 import { blogReducer } from './store/blog/blog.reducer';
 import { BlogEffects } from './store/blog/blog.effects';
 import { EffectsModule } from '@ngrx/effects';
+import { ArticleComponent } from './blog/article/article.component';
+import { PostResolver } from './blog/article/post.resolver';
+import { BlogComponent } from './blog/blog.component';
 
 
 const appRoutes: Routes = [
   {path: 'home', redirectTo: '/home', pathMatch: 'full'},
   {path: 'about', redirectTo: '/about', pathMatch: 'full'},
-  {path: 'blog', redirectTo: '/blog', pathMatch: 'full'},
-  {path: 'post', redirectTo: '/post', pathMatch: 'full'},
+  {path: 'blog', component: BlogComponent, pathMatch: 'full'},
+  {
+    path: 'blog/:url',
+    component: ArticleComponent,
+    resolve: {
+      data: PostResolver
+    }
+  },
+  {path: 'publish', redirectTo: '/publish', pathMatch: 'full'},
   {path: '', redirectTo: '/home', pathMatch: 'full'}
-  //{path: '**', redirectTo: '/home', pathMatch: 'full'},
 ];
 
 @NgModule({
@@ -45,7 +54,7 @@ const appRoutes: Routes = [
     StoreModule.forRoot({blog: blogReducer}),
     EffectsModule.forRoot([BlogEffects])
   ],
-  providers: [],
+  providers: [PostResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

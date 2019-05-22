@@ -8,8 +8,8 @@ import { resolve } from 'q';
 import { ArticleComponent } from './blog/article/article.component';
 import { BlogState } from './store/blog/blog.reducer';
 import { Store, select } from '@ngrx/store';
-import { RequestPostsMetadata } from './store/blog/blog.actions';
-import { PostsMetadata } from './store/blog/blog.selector';
+import { RequestPostsMetadata, LogIn, LogOut } from './store/blog/blog.actions';
+import { PostsMetadata, SelectLogIn } from './store/blog/blog.selector';
 import { PostResolver } from './blog/article/post.resolver';
 
 
@@ -25,37 +25,29 @@ export class AppComponent {
   loginData: LoginData;
   username: string;
   password: string;
-  isLoggedIn: boolean;
+  private isLoggedIn: boolean;
   status: string;
   private postsMetadata: Array<any>;
 
 
   constructor(private router: Router, private blogService: BlogService, private store: Store<BlogState>) {
 
+    this.isLoggedIn = false;
+
     this.store.dispatch(new RequestPostsMetadata);
-    this.store.pipe(select(PostsMetadata)).subscribe(postsMetadata => {
-      this.postsMetadata = postsMetadata;
-      this.addAllPostsToConfig();
-    })
+    this.store.pipe(select(SelectLogIn)).subscribe(loggedIn => {
+      this.isLoggedIn = loggedIn;
+    });
 
     this.loginData = {
       username: "lenngro",
       password: ""
     }
-    this.isLoggedIn = false;
 
     this.router.events.subscribe(() => {
       this.currentPage = router.url;
     });
 
-  }
-
-  addAllPostsToConfig() {
-
-    for (let postsMetadata of this.postsMetadata) {
-      let postUrl = 'blog/' + postsMetadata.url;
-      this.router.config.push({path: postUrl, component: ArticleComponent, resolve: { data: PostResolver }, data: { postMetadata: postsMetadata }})
-    }
   }
 
   onPage(page: string) {
@@ -69,13 +61,16 @@ export class AppComponent {
   }
 
   login() {
-
     this.blogService.login(this.loginData).subscribe(response => {
       if (response === true) {
-        this.isLoggedIn = true;
+        this.store.dispatch(new LogIn);
       }
     })
     this.loginData.password = "";
+  }
+
+  logout() {
+    this.store.dispatch(new LogOut);    
   }
 
   homeClick() {
@@ -84,7 +79,7 @@ export class AppComponent {
   }
 
   blogClick() {
-    this.router.navigateByUrl('/blog');
+    this.router.navigate(['/blog'], {queryParams: {page: 0}});
     this.status = "blog";
   }
 
@@ -94,7 +89,7 @@ export class AppComponent {
   }
 
   postClick() {
-    this.router.navigateByUrl('/post');
+    this.router.navigateByUrl('/publish');
     this.status = "post";
   }
 

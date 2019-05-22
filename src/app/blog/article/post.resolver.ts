@@ -11,9 +11,8 @@ import { BlogService } from 'src/app/services/blog.service';
 export class PostResolver implements Resolve<Observable<Post>> { 
   constructor(private blogService: BlogService) {} 
 
-
-  resolve(route: ActivatedRouteSnapshot): Observable<Post> { 
-    let postMetadata = route.data['postMetadata']; 
-    return this.blogService.getPost(postMetadata.url);
+  resolve(route: ActivatedRouteSnapshot): Observable<Post> {
+    let postUrl = route.paramMap.get('url');
+    return this.blogService.getPost(postUrl);
   } 
 }
